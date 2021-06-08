@@ -10,9 +10,9 @@ import getpass, os, sys
 
 def test_populate_init_data_sphere():
     
-    Nx=2
-    Ny=2
-    Nz=2
+    Nx=3
+    Ny=5
+    Nz=7
     ZZ=np.arange(Nz, dtype=np.float64)
     YY=np.arange(Ny, dtype=np.float64)
     XX=np.arange(Nx, dtype=np.float64)
