@@ -20,7 +20,7 @@ def test_populate_init_data_sphere():
 
     # (1) compute the result using our C extension
     t0 = time()
-    out = init_data_sphere(ZZ, YY, XX,voxel)
+    out = init_data_sphere(ZZ, YY, XX,voxel_size)
     dt0 = time() - t0
     print("XX={}".format(XX))
     print("XX shape={}".format(XX.shape))
