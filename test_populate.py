@@ -4,6 +4,7 @@ import numpy as np
 from time import time
 from datasphere.populate import init_data_sphere
 import getpass, os, sys
+#np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
 
 #pt_interpolate=pti
 
@@ -15,7 +16,8 @@ def test_populate_init_data_sphere():
     ZZ=np.arange(Nz, dtype=np.float64)
     YY=np.arange(Ny, dtype=np.float64)
     XX=np.arange(Nx, dtype=np.float64)
-    
+
+    print(XX,YY,ZZ)
     voxel_size=np.array([1.], dtype=np.float64)
 
     # (1) compute the result using our C extension

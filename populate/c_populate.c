@@ -21,17 +21,17 @@ void init_ds(double * data_sphere_points,
   double hf_voxel=voxel[0]/2;
   printf("\nhf voxel = %f \n", hf_voxel);
 
-  size_t I,J,K;
+  size_t I,J;
   for (size_t i=0;i<Nx;++i){
     I=i*Ny*Nz*3;
     for (size_t j=0;j<Ny;++j){
       J=j*Nz*3;
       printf("\nENTERED for loop i=%zu j=%zu\n",i,j);
-#pragma omp parallel for shared(data_sphere_points, ZZ,YY,XX, hf_voxel, I,J,K, Nz)
+#pragma omp parallel for shared(data_sphere_points, ZZ,YY,XX, hf_voxel, I,J, Nz)
       for (size_t k=0; k<Nz; ++k){
-	K=k*3;
+	size_t K=k*3;
 	printf("\n  ENTERED for loop I=%zu J=%zu K=%zu k=%zu\n",I,J,K,k);
-
+	printf("\n ITEMS = %zu %zu %zu\n",I+J+K,I+J+K+1,I+J+K+2);
 	data_sphere_points[I+J+K   ] = XX[i] + hf_voxel;
 	data_sphere_points[I+J+K +1] = YY[j] + hf_voxel;
 	data_sphere_points[I+J+K +2] = ZZ[k] + hf_voxel;
