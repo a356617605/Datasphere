@@ -11,7 +11,7 @@ c_flags = []
 c_flags.append("-O3")
 # c_flags.append("-ffast-math")
 #c_flags.append("-lgomp")
-#c_flags.append("-fopenmp")
+c_flags.append("-fopenmp")
 c_flags.append("-march=native")
 c_flags.append("-fPIC")
 c_flags.append("-fopt-info")
@@ -54,8 +54,8 @@ class CleanCommand(Command):
         os.system('rm -vrf populate/populate.c')
         os.system('rm -vRf populate/__pycache__')
         os.system('rm -vrf populate.egg-info')
-        os.system("find interp -name '*.so' -delete -print")
-        os.system("find interp -name '*.pyc' -delete -print")
+        os.system("find populate -name '*.so' -delete -print")
+        os.system("find populate -name '*.pyc' -delete -print")
 
 
 setup(name="interp",

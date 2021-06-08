@@ -10,7 +10,7 @@ void init_ds(double * data_sphere_points,
 	     double * voxel){
 
   pid_t pid = getpid();
-  printf("\nPID %lun ENTERED PT_INTERP FUNCTION\n", pid);
+  printf("\nPID %d ENTERED PT_INTERP FUNCTION\n", pid);
 
   if(!data_sphere_points){ printf("data_sphere_points pointer is null");return;}
   if(!ZZ){ printf("ZZ pointer is null");return;}
@@ -19,7 +19,7 @@ void init_ds(double * data_sphere_points,
   if(!voxel){ printf("voxel pointer is null");return;}
 
   double hf_voxel=voxel[0]/2;
-  printf("\nhf voxel = %f \n", hf_voxel)
+  printf("\nhf voxel = %f \n", hf_voxel);
 
   size_t I,J,K;
   for (size_t i=0;i<Nx;++i){
@@ -27,16 +27,17 @@ void init_ds(double * data_sphere_points,
     for (size_t j=0;j<Ny;++j){
       J=j*Nz*3;
       printf("\nENTERED for loop i=%zu j=%zu\n",i,j);
-      #pragma omp parallel for shared(data_sphere_points, ZZ,YY,XX, hf_voxel, I,J, Nz)
+#pragma omp parallel for shared(data_sphere_points, ZZ,YY,XX, hf_voxel, I,J,K, Nz)
       for (size_t k=0; k<Nz; ++k){
-	printf("\n  ENTERED for loop I=%zu J=%zu k=%zu\n",I,J,k);
 	K=k*3;
+	printf("\n  ENTERED for loop I=%zu J=%zu K=%zu k=%zu\n",I,J,K,k);
+
 	data_sphere_points[I+J+K   ] = XX[i] + hf_voxel;
 	data_sphere_points[I+J+K +1] = YY[j] + hf_voxel;
 	data_sphere_points[I+J+K +2] = ZZ[k] + hf_voxel;
       }
     }
   }
-  printf("\nPID %lun EXITING PT_INTERP FUNCTION\n", pid);
+  printf("\nPID %d EXITING PT_INTERP FUNCTION\n", pid);
 
 }

@@ -9,10 +9,10 @@ import numpy as np
 cimport numpy as np
 
 cdef extern from "c_populate.h":
-void init_ds(double *,
-             double *, double *, double *,
-             size_t, size_t, size_t,
-             double * );
+    void init_ds(double *,
+                 double *, double *, double *,
+                 size_t, size_t, size_t,
+                 double * );
 
     
 def init_data_sphere(np.ndarray ZZ, np.ndarray YY, np.ndarray XX,
@@ -28,21 +28,20 @@ def init_data_sphere(np.ndarray ZZ, np.ndarray YY, np.ndarray XX,
     assert ZZ.dtype == np.float64 and \
         YY.dtype == np.float64 and \
         XX.dtype == np.float64 and \
-        voxel.dtype == np.float64, \
+        voxel_size.dtype == np.float64, \
         "Input np arrays dtype not supported"
-    assert data_sphere_points.ndim==2 and \
-        ZZ.ndim == 1  and \
+    assert ZZ.ndim == 1  and \
         YY.ndim == 1  and \
         XX.ndim == 1  and \
-        voxel.ndim == 1,  \
+        voxel_size.ndim == 1,  \
         "input ndim not supported"
 
     cdef size_t Nx=XX.shape[0], Ny=YY.shape[0], Nz=ZZ.shape[0]
-    cdef np.ndarray data_sphere_points=np.empty(shape=(Nx*Ny*Nz,3), dtype=ZZ.dtype)
+    cdef np.ndarray data_sphere_points=np.empty(shape=(XX.shape[0]*YY.shape[0]*ZZ.shape[0],3), dtype=ZZ.dtype)
 
-    init_ds(<double*>data_sphere_points,
-            <double*>ZZ, <double*>YY, <double*>XX,
+    init_ds(<double*>data_sphere_points.data,
+            <double*>ZZ.data, <double*>YY.data, <double*>XX.data,
             <size_t>Nz, <size_t>Ny, <size_t>Nx,
-            <double*>voxel_size)
+            <double*>voxel_size.data)
 
     return data_sphere_points
