@@ -9,7 +9,8 @@ import numpy as np
 cimport numpy as np
 
 cdef extern from "c_populate.h":
-void init_ds(double *, double *, double *,
+void init_ds(double *,
+             double *, double *, double *,
              size_t, size_t, size_t,
              double * );
 
