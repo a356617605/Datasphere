@@ -1,12 +1,7 @@
-#!/usr/bin/env python
-
 import numpy as np
 from time import time
 from datasphere.populate import init_data_sphere
 import getpass, os, sys
-#np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
-
-#pt_interpolate=pti
 
 def test_populate_init_data_sphere():
     
@@ -29,14 +24,6 @@ def test_populate_init_data_sphere():
     print("out={}".format(out))
     print("out.shape={}".format(out.shape))
 
-
-    # (3) compare both the results, be careful with NumPy temporary arrays
-    #try:
-    #    assert(np.allclose(out, out_sci))
-    #except:
-    #    raise
-    #else:
-    #    print("OK! t(C)=%f, t(NumPy)=%f" % (dt0, dt1), flush=True)
 
 # MAIN
 if __name__ == "__main__":
